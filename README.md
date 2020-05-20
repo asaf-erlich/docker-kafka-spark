@@ -1,6 +1,6 @@
 # Kafka Spark Streaming With PySpark
 
-This repository contains a docker-compose.yml file which when started up creates a zookeeper backend, two kafkas managed by a kafka manager, one intended to be used as a producer andone for use as a consumer, and finally pyspark available in a file container for submitting streaming jobs through spark.
+This repository contains a docker-compose.yml file which when started up creates a zookeeper backend, two kafkas, one intended to be used as a producer andone for use as a consumer, and finally pyspark available in a file container for submitting streaming jobs through spark.
 
 ## Educational Purpose
 
@@ -10,10 +10,9 @@ This repository was created to be used as part of a intro to data science class 
 
 | Container | Image | Tag | Accessible |
 |-|-|-|-|
-| zookeeper | wurstmeister/zookeeper | latest | 172.25.0.11:2181 |
-| kafka1 | wurstmeister/kafka | 2.12-2.2.0 | 172.25.0.12:9092 (port 8080 for JMX metrics) |
-| kafka1 | wurstmeister/kafka | 2.12-2.2.0 | 172.25.0.13:9092 (port 8080 for JMX metrics) |
-| kafka_manager | hlebalbau/kafka_manager | 1.3.3.18 | 172.25.0.14:9000 |
+| zookeeper | zookeeper | 3.6.1 | 172.25.0.11:2181 |
+| kafka1 | wurstmeister/kafka | 2.12-2.2.0 | 172.25.0.12:9092 |
+| kafka1 | wurstmeister/kafka | 2.12-2.2.0 | 172.25.0.13:9092 |
 
 # Quickstart
 

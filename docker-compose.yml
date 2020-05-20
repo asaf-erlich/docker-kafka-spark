@@ -50,23 +50,6 @@ services:
       kafkanet:
         ipv4_address: 172.25.0.13
 
-  kafka_manager:
-    image: hlebalbau/kafka-manager:3.0.0.2
-    container_name: kafka_manager
-    expose:
-      - "9000"
-    environment:
-      ZK_HOSTS: "172.25.0.11:2181"
-      APPLICATION_SECRET: "random-secret"
-    command: -Dpidfile.path=/dev/null
-    depends_on:
-      - "zookeeper"
-      - "kafka1"
-      - "kafka2"
-    networks:
-      kafkanet:
-        ipv4_address: 172.25.0.14
-
 networks:
   kafkanet:
     name: kafkanet
@@ -75,7 +58,6 @@ networks:
       driver: default
       config:
         - subnet: 172.25.0.0/16
-          gateway: 172.25.0.1
 
 volumes:
   kafka_zookeeper:
