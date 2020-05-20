@@ -1,0 +1,84 @@
+version: "3.7"
+services:
+
+  zookeeper:
+    image: zookeeper:3.6.1
+    container_name: zookeeper
+    expose:
+      - "2181"
+    volumes:
+      - kafka_zookeeper:/opt/zookeeper-3.6.1/data
+    networks:
+      kafkanet:
+        ipv4_address: 172.25.0.11
+
+  kafka1:
+    image: wurstmeister/kafka:2.12-2.2.0
+    container_name: kafka1
+    command: [start-kafka.sh]
+    expose:
+      - "8080"
+      - "9092"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: 172.25.0.12
+      KAFKA_ZOOKEEPER_CONNECT: 172.25.0.11:2181
+      KAFKA_ADVERTISED_PORT: 9092
+    volumes:
+      - kafka_kafka1:/opt/kafka_2.12-2.2.0/logs
+    networks:
+      kafkanet:
+        ipv4_address: 172.25.0.12
+    depends_on:
+      - "zookeeper"
+
+  kafka2:
+    image: wurstmeister/kafka:2.12-2.2.0
+    container_name: kafka2
+    command: [start-kafka.sh]
+    expose:
+      - "8080"
+      - "9092"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: 172.25.0.13
+      KAFKA_ZOOKEEPER_CONNECT: 172.25.0.11:2181
+      KAFKA_ADVERTISED_PORT: 9092
+    volumes:
+      - kafka_kafka2:/opt/kafka_2.12-2.2.0/logs
+    depends_on:
+      - "zookeeper"
+    networks:
+      kafkanet:
+        ipv4_address: 172.25.0.13
+
+  kafka_manager:
+    image: hlebalbau/kafka-manager:3.0.0.2
+    container_name: kafka_manager
+    expose:
+      - "9000"
+    environment:
+      ZK_HOSTS: "172.25.0.11:2181"
+      APPLICATION_SECRET: "random-secret"
+    command: -Dpidfile.path=/dev/null
+    depends_on:
+      - "zookeeper"
+      - "kafka1"
+      - "kafka2"
+    networks:
+      kafkanet:
+        ipv4_address: 172.25.0.14
+
+networks:
+  kafkanet:
+    name: kafkanet
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.25.0.0/16
+          gateway: 172.25.0.1
+
+volumes:
+  kafka_zookeeper:
+  kafka_kafka1:
+  kafka_kafka2:
+
