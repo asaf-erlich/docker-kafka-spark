@@ -51,7 +51,7 @@ services:
         ipv4_address: 172.25.0.13
 
   spark:
-    image: bitnami/spark:2.4.5
+    image: gettyimages/spark:2.4.1-hadoop-3.0
     container_name: spark
     networks:
       kafkanet:
