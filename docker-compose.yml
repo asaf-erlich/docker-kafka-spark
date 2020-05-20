@@ -50,6 +50,13 @@ services:
       kafkanet:
         ipv4_address: 172.25.0.13
 
+  spark:
+    image: bitnami/spark:2.4.5
+    container_name: spark
+    networks:
+      kafkanet:
+        ipv4_address: 172.25.0.14
+
 networks:
   kafkanet:
     name: kafkanet
