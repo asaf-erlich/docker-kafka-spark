@@ -1,6 +1,6 @@
 # Kafka With Spark Streaming
 
-This repository contains a docker-compose.yml file which when started up creates a zookeeper backend, two kafkas, one intended to be used as a producer andone for use as a consumer, and spark available in a container for submitting streaming jobs.
+This repository contains a docker-compose.yml file which when started up creates a zookeeper backend, two kafkas, one intended to be used as a producer and one for use as a consumer, and spark available in a container for submitting streaming jobs.
 
 ## Educational Purpose
 
