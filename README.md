@@ -73,39 +73,38 @@ There are two samples of code included to test and try out publishing data onto 
 Inside of the git repository there is a code sample to add the numbers 1 to 1000 onto a topic 'SAMPLE_TOPIC_NAME'. To view the code open the file create_topic_send_data.py. To run it follow these steps:
 
 1. Open a shell inside the spark container (assumes the containers are up and running)
-  ```
-  docker-compose exec spark bash
-  ```
+    ```
+    docker-compose exec spark bash
+    ```
 1. Cd into the /app directory which has the volume pointing to the same directory as the root of the repository
-  ```
-  cd /app
-  ```
+    ```
+    cd /app
+    ```
 1. Pip Install kafka-python
-  ```
-  pip install kafka-python
-  ```
+    ```
+    pip install kafka-python
+    ```
 1. Execute the python code
-  ```
-  python create_topic_send_data.py
-  ```
+    ```
+    python create_topic_send_data.py
+    ```
 
 ### Reading Data With Spark SQL
 
 Also included is a code sample to read data from a topic using spark sql. To view the code open the file spark_read_from_topic_and_show.py. Also provided are two jar files that spark needs for spark sql and the kafka client. Because the volume is mounted into the /app folder all those files will be there to use. To run it follow these steps:
 
 1. Open a shell inside the spark container (assumes the containers are up and running)
-  ```
-  docker-compose exec spark bash
-  ```
+    ```
+    docker-compose exec spark bash
+    ```
 1. Cd into the /app directory which has the volume pointing to the same directory as the root of the repository
-  ```
-  cd /app
-  ```
-
+    ```
+    cd /app
+    ```
 1. Submit the python code to spark along with the jar files:
-  ```
-  spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.5 --jars kafka-clients-2.2.0.jar --driver-class-path kafka-clients-2.2.0.jar spark_read_from_topic_and_show.py
-  ```
+    ```
+    spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.5 --jars kafka-clients-2.2.0.jar --driver-class-path kafka-clients-2.2.0.jar spark_read_from_topic_and_show.py
+    ```
 
 The output includes a lot of information but eventually you should expect to see
 
