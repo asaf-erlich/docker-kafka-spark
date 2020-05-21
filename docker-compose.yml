@@ -53,6 +53,8 @@ services:
   spark:
     image: gettyimages/spark:2.4.1-hadoop-3.0
     container_name: spark
+    volumes:
+      - ./:/app
     networks:
       kafkanet:
         ipv4_address: 172.25.0.14
